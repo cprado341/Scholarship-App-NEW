@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Scholarship Agent Autofill",
+  "version": "0.1.3",
+  "description": "Fills approved scholarship application fields from the local Scholarship Agent portal and stops before final submit.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Scholarship Agent Autofill"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["activeTab", "scripting", "storage", "tabs"],
+  "host_permissions": [
+    "http://localhost:4317/*",
+    "http://127.0.0.1:4317/*",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://localhost:4317/*", "http://127.0.0.1:4317/*"],
+      "js": ["portal-bridge.js"],
+      "run_at": "document_start"
+    }
+  ]
+}
